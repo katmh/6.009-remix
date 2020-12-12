@@ -6,19 +6,20 @@ Creative extensions of [6.009](https://py.mit.edu) labs (SOEMHTING OF MY OWNWNNN
 
 ### 0: Audio Processing
 
-Write a script that splits an audio file (i.e. an acapella song into individual words, ideally), reverses them, then stitches them back together
-
-And/or implement in a programming language other than Python
+- Write a script that splits an audio file (i.e. an acapella song into individual words, ideally), reverses them, then stitches them back together
+- (The funnier but potentially unfeasible idea is to detect the words and alphabetically order the audio clips)
+- And/or implement in a programming language other than Python
+- Something inspired by acapella/choir: singing in rounds, harmonies, etc.
 
 ### 1: Image Processing 1
 
-Make a GUI or script for cropping I often need to do but is inconvenient in Preview (e.g. move a fixed-aspect-ratio selection box around)
+- Make a GUI or script for cropping I often need to do but is inconvenient in Preview (e.g. move a fixed-aspect-ratio selection box around)
+- Surreal gen Z meme generator by composing random elements/backgrounds/WordArt together
 
 ### 2: Image Processing 2
 
-Thicken noisy parts of image
-
-Snapdragon v2 >:)
+- Thicken noisy parts of image
+- [Snapdragon](https://github.com/katmh/snapdragon) v2 >:)
  
 ### 3: Bacon Number
 
