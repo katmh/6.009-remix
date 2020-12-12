@@ -33,6 +33,6 @@ s2['left']
 
 ## Tasks
 
-- [ ] Read/write audio files to/from friendly format
+- [x] Read/write audio files to/from friendly format
 - [ ] Decide and implement where to make splits
 - [ ] Write unit (e.g. file I/O, "correct" split locations, correct reversals) and integration (e.g. entire file split-reversed correctly) tests
