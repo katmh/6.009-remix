@@ -4,8 +4,6 @@ Extends Lab 0: Audio Processing
 
 Write a script that splits an audio file (i.e. an acapella song into individual words, ideally), reverses them, then stitches them back together
 
-(Yeah it's actually reversing not rewinding)
-
 ## Overview of original lab
 
 **Purpose:** Warmup/make sure we can program in Python, run tests, etc. Introduce us to the idea that we can read in file formats (and show that multimedia files aren't that scary to work with). Do some simple manipulations with impressive mileage!
@@ -34,5 +32,9 @@ s2['left']
 ## Tasks
 
 - [x] Read/write audio files to/from friendly format
-- [ ] Decide and implement where to make splits
+- [x] Attempt to isolate vocals (learned about phase cancellation!)
+- [x] Implement splits
+- [ ] Implement splits without a library
 - [ ] Write unit (e.g. file I/O, "correct" split locations, correct reversals) and integration (e.g. entire file split-reversed correctly) tests
+- [ ] Level up code style
+- [ ] Write-up

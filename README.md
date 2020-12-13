@@ -8,7 +8,7 @@ Here are the names of each lab and my ideas for extending each
 
 ### 0: Audio Processing
 
-- Write a script that splits an audio file (i.e. an acapella song into individual words, ideally), reverses them, then stitches them back together
+- [x] Write a script that splits an audio file (i.e. an acapella song into individual words, ideally), reverses them, then stitches them back together
 - (The funnier but potentially unfeasible idea is to detect the words and alphabetically order the audio clips)
 - And/or implement in a programming language other than Python
 - Handle file formats other than .wav ([possible starter reference](https://hackernoon.com/audio-handling-basics-how-to-process-audio-files-using-python-cli-jo283u3y))
