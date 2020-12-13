@@ -1,6 +1,9 @@
 import io
 import wave
 import struct  # C structs represented as Python bytes objects
+import itertools
+from pyAudioAnalysis import audioBasicIO
+from pyAudioAnalysis import audioSegmentation as aS
 
 # helper functions for converting back and forth between WAV files and
 # our internal dictionary representation for sounds
@@ -113,20 +116,81 @@ def isolate_vocals(sound):
 
 # splitting by silence: visualize audio waveform
 # maybe https://walczak.org/2019/02/automatic-splitting-audio-files-silence-python/
+# oooooh https://css-tricks.com/making-an-audio-waveform-visualizer-with-vanilla-javascript/
 
 
 def backwards(sound):
     """
     Given a sound, return a new sound with the samples reversed
     """
+    new_sound = {"rate": sound["rate"], "left": [], "right": []}
+    # TODO: make more elegant, copied this straight from original lab
+    # loop over left and right lists backwards and add to new_sound
+    # NOTE FROM CHECKOFF LA: could've also used .reverse()
+    i = len(sound["left"]) - 1
+    while i >= 0:
+        new_sound["left"].append(sound["left"][i])
+        new_sound["right"].append(sound["right"][i])
+        i -= 1
+
+    return new_sound
+
+
+get_name = lambda filename: filename.split(".wav")[0].split("/")[-1]
+
+
+def split(filename, sound, seg_limits):
+    """
+    Given a sound and list of silent sections, return a list of sounds resulting
+    from splitting the original sound at the start of each silent section
+    """
+    # convert seconds to integer samples
+    # add 0 in beginning so we can always go from t_(i-1) to t_i; TODO: make more elegant
+    times = [0] + [int(limit[0] * sound["rate"]) for limit in seg_limits]
+    new_sounds = []
+    for i, t in enumerate(times):
+        if i == 0:
+            continue
+        new_sound = {
+            "rate": sound["rate"],
+            "left": sound["left"][times[i - 1] : t],
+            "right": sound["right"][times[i - 1] : t],
+        }
+        new_sounds.append(new_sound)
+    return new_sounds
+
+
+def write_splits(filename, seg_limits):
+    """
+    Given a sound and a list of silent sections, write new audio files resulting
+    from splitting the original sound at the start of each silent section
+    """
+    name = get_name(filename)
+    sound = load_wav(filename)
+    splits = split(name, sound, seg_limits)
+    for i, s in enumerate(splits):
+        # TODO
+        start = round(seg_limits[i][0], 2)
+        end = round(seg_limits[i][0], 2)
+        new_name = f"{name}_{start}-{end}.wav"
+        write_wav(s, new_name)
+
+
+def split_reverse(filename):
+    name = get_name(filename)
+    sound = load_wav(filename)
+    [samp_rate, audio_signal] = audioBasicIO.read_audio_file("sounds/speaknow.wav")
+    seg_limits = aS.silence_removal(audio_signal, samp_rate, 0.05, 0.05)
+    clips = split(name, sound, seg_limits)
+    # reverse each clip
+    reversed_clips = [backwards(s) for s in clips]
+    # stitch the clips together
     return {
         "rate": sound["rate"],
-        "left": sound["left"].reverse(),
-        "right": sound["right"].reverse(),
+        "left": itertools.chain(*[s["left"] for s in reversed_clips]),
+        "right": itertools.chain(*[s["right"] for s in reversed_clips]),
     }
 
-
-# stitch the clips together
 
 # when interpreter runs a module, the __name__ variable gets set as __main__ if the module
 # being run is the main program. if the code is importing the module from another module,
@@ -141,3 +205,6 @@ if __name__ == "__main__":
     write_wav(norgaard_v, "norgaard_v.wav")
     write_wav(norgaard_i, "norgaard_i.wav")
     """
+
+    # write_wav(split_reverse("sounds/speaknow.wav"), "speaknow_split-reverse.wav")
+    write_wav(split_reverse("sounds/hello.wav"), "hello_split-reverse.wav")

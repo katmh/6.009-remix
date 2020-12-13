@@ -4,11 +4,14 @@ Creative extensions of [6.009](https://py.mit.edu) labs (SOEMHTING OF MY OWNWNNN
 
 ## Fall 2020 labs
 
+Here are the names of each lab and my ideas for extending each
+
 ### 0: Audio Processing
 
 - Write a script that splits an audio file (i.e. an acapella song into individual words, ideally), reverses them, then stitches them back together
 - (The funnier but potentially unfeasible idea is to detect the words and alphabetically order the audio clips)
 - And/or implement in a programming language other than Python
+- Handle file formats other than .wav ([possible starter reference](https://hackernoon.com/audio-handling-basics-how-to-process-audio-files-using-python-cli-jo283u3y))
 - Something inspired by acapella/choir: singing in rounds, harmonies, etc.
 
 ### 1: Image Processing 1
